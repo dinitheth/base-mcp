@@ -5,7 +5,7 @@ import { chainIdToChain } from '../../chains.js';
 export function constructBaseScanUrl(
   chain: Chain,
   transactionHash: `0x${string}`,
-) {
+): string {
   if (chain.id === base.id) {
     return `https://basescan.org/tx/${transactionHash}`;
   }
@@ -13,6 +13,8 @@ export function constructBaseScanUrl(
   if (chain.id === baseSepolia.id) {
     return `https://sepolia.basescan.org/tx/${transactionHash}`;
   }
+
+  throw new Error(`Unsupported chain ID: ${chain.id}`);
 }
 
 export const checkToolSupportsChain = ({
